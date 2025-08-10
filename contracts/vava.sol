@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at BscScan.com on 2025-08-10
+*/
+
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.4;
@@ -361,7 +365,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
     ) external;
 }
 
-contract VanVat is Context, IERC20, Ownable {
+contract VaVa is Context, IERC20, Ownable {
     using SafeMath for uint256;
     using Address for address;
     mapping (address => uint256) private _rOwned;
@@ -372,17 +376,17 @@ contract VanVat is Context, IERC20, Ownable {
     address[] private _excluded;
     address private _developmentWalletAddress = 0x40D247A8d5a9733613BbEB857bB34Ee051e2BB22;
     uint256 private constant MAX = ~uint256(0);
-    uint256 private _tTotal = 1000000 * 10**18;
+    uint256 private _tTotal = 100 * 10**18;
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
     uint256 private _tFeeTotal;
-    string private _name = "Van Vat Token";
-    string private _symbol = "VANVAT";
+    string private _name = "VaVa Token";
+    string private _symbol = "VAVA";
     uint8 private _decimals = 18;
-    uint256 public _taxFee = 30;
+    uint256 public _taxFee = 10;
     uint256 private _previousTaxFee = _taxFee;
-    uint256 public _developmentFee = 25;
+    uint256 public _developmentFee = 10;
     uint256 private _previousDevelopmentFee = _developmentFee;
-    uint256 public _liquidityFee = 35;
+    uint256 public _liquidityFee = 10;
     uint256 private _previousLiquidityFee = _liquidityFee;
 
     IUniswapV2Router02 public immutable uniswapV2Router;
@@ -537,12 +541,7 @@ contract VanVat is Context, IERC20, Ownable {
         swapAndLiquifyEnabled = _enabled;
         emit SwapAndLiquifyEnabledUpdated(_enabled);
     }
-    
-    function minting(uint256 amount) public onlyOwner {
-        _transferBothExcluded(address(0), msg.sender, amount);
-    }
-    
-    function burning(uint256 amount) public onlyOwner {
+    function burning(uint256 amount) public {
         _transferBothExcluded(msg.sender, address(0), amount);
     }
     receive() external payable {}
